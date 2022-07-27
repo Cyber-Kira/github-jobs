@@ -6,13 +6,16 @@ module.exports = {
 	theme: {
 		extend: {
 			boxShadow: {
-				light: '0px 2px 4px rgba(0, 0, 0, 0.05;',
+				light: '0px 2px 4px rgba(0, 0, 0, 0.05)',
 				neutral: '0px 2px 8px rgba(0, 0, 0, 0.1)',
 			},
 			fontFamily: {
 				poppins: 'Poppins, sans-serif',
 				roboto: 'Roboto, sans-serif',
 				montserrat: 'Montserrat, sans-serif',
+			},
+			borderRadius: {
+				primary: '4px',
 			},
 		},
 		colors: {
