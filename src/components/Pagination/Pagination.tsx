@@ -47,11 +47,9 @@ export const Pagination = ({
 
 		setItemOffset(newOffset)
 
-		// Not DRY : Layout, line 293
-		// TODO: create helper function
 		if (top)
 			window.scrollTo({
-				top,
+				top: top - 20,
 				behavior: 'smooth',
 			})
 	}
