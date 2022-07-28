@@ -1,7 +1,12 @@
 import React from 'react'
+import { useAppDispatch, useAppSelector } from '../../../../app/hooks'
+import { setFavLocation } from '../../../../features/search/searchSlice'
 import { Search } from './components'
 
 export const Location = () => {
+	const { favLocation } = useAppSelector(store => store.search)
+	const dispatch = useAppDispatch()
+
 	return (
 		<div className='flex flex-col gap-5'>
 			<span className='font-poppins font-bold text-sm uppercase text-gray'>
@@ -19,6 +24,8 @@ export const Location = () => {
 						id='city1'
 						name='city'
 						value='London'
+						checked={favLocation === 'London'}
+						onChange={() => dispatch(setFavLocation('London'))}
 					/>
 					<div className='absolute w-[.75rem] h-[.75rem] left-[3px] top-[4px] rounded-full peer-checked:bg-accent scale-75 peer-checked:scale-100 transition-colors' />
 					London
@@ -34,6 +41,8 @@ export const Location = () => {
 						id='city2'
 						name='city'
 						value='Amsterdam'
+						checked={favLocation === 'Amsterdam'}
+						onChange={() => dispatch(setFavLocation('Amsterdam'))}
 					/>
 					<div className='absolute w-[.75rem] h-[.75rem] left-[3px] top-[4px] rounded-full peer-checked:bg-accent scale-75 peer-checked:scale-100 transition-colors' />
 					Amsterdam
@@ -48,6 +57,8 @@ export const Location = () => {
 						id='city3'
 						name='city'
 						value='New York'
+						checked={favLocation === 'New York'}
+						onChange={() => dispatch(setFavLocation('New York'))}
 					/>
 					<div className='absolute w-[.75rem] h-[.75rem] left-[3px] top-[4px] rounded-full peer-checked:bg-accent scale-75 peer-checked:scale-100 transition-colors' />
 					New York
@@ -62,6 +73,8 @@ export const Location = () => {
 						id='city4'
 						name='city'
 						value='Berlin'
+						checked={favLocation === 'Berlin'}
+						onChange={() => dispatch(setFavLocation('Berlin'))}
 					/>
 					<div className='absolute w-[.75rem] h-[.75rem] left-[3px] top-[4px] rounded-full peer-checked:bg-accent scale-75 peer-checked:scale-100 transition-colors' />
 					Berlin

@@ -1,6 +1,11 @@
 import React from 'react'
+import { useAppDispatch, useAppSelector } from '../../../../../app/hooks'
+import { setLocationQuery } from '../../../../../features/search/searchSlice'
 
 export const Search = () => {
+	const { locationQuery } = useAppSelector(store => store.search)
+	const dispatch = useAppDispatch()
+
 	return (
 		<div>
 			<label
@@ -16,6 +21,8 @@ export const Search = () => {
 					name='locationSearch'
 					id='locationSearch'
 					placeholder='City, state, zip code or country'
+					value={locationQuery}
+					onChange={e => dispatch(setLocationQuery(e.target.value))}
 				/>
 			</label>
 		</div>
