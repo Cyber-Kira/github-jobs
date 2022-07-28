@@ -1,7 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
+import { googleJobsSlice } from '../features/jobs/googleJobsSlice'
+import { searchSlice } from '../features/search/searchSlice'
 
 export const store = configureStore({
-	reducer: {},
+	reducer: {
+		googleJobs: googleJobsSlice.reducer,
+		search: searchSlice.reducer,
+	},
 })
 
 export type AppDispatch = typeof store.dispatch

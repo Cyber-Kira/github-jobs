@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
-import { JobItem, JobItemInterface } from '../JobItem'
+import { JobsResultInterface } from '../../features/jobs/googleJobsSlice'
+import { JobItem } from '../JobItem'
 
-const Items = ({ currentItems }: { currentItems: JobItemInterface[] }) => {
+const Items = ({ currentItems }: { currentItems: JobsResultInterface[] }) => {
 	return (
 		<div className='flex flex-col gap-8'>
 			{currentItems &&
 				currentItems.map(item => {
 					return (
 						<JobItem
-							key={item.id}
-							image={item.image}
+							key={item.job_id}
+							image={item.thumbnail}
 							description={item.description}
-							employer={item.employer}
+							employer={item.company_name}
 							location={item.location}
-							publishedDate={item.publishedDate}
+							publishedDate={item.detected_extensions.posted_at}
 							title={item.title}
-							type={item.type}
+							type={item.detected_extensions.schedule_type}
 						/>
 					)
 				})}
@@ -29,9 +30,9 @@ export const Pagination = ({
 	projects,
 }: {
 	itemsPerPage: number
-	projects: JobItemInterface[]
+	projects: JobsResultInterface[]
 }) => {
-	const [currentItems, setCurrentItems] = useState<JobItemInterface[]>([])
+	const [currentItems, setCurrentItems] = useState<JobsResultInterface[]>([])
 	const [pageCount, setPageCount] = useState(0)
 	const [itemOffset, setItemOffset] = useState(0)
 

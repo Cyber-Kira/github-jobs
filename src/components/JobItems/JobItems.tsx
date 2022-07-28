@@ -1,8 +1,10 @@
 import React from 'react'
+import { useAppSelector } from '../../app/hooks'
 import { JobItemInterface } from '../JobItem/JobItem'
 import { Pagination } from '../Pagination'
 
-const jobs: JobItemInterface[] = [
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const jobsDummy: JobItemInterface[] = [
 	{
 		id: 1,
 		image:
@@ -184,5 +186,7 @@ const jobs: JobItemInterface[] = [
 ]
 
 export const JobItems = () => {
-	return <Pagination projects={jobs} itemsPerPage={5} />
+	const { jobs } = useAppSelector(store => store.googleJobs)
+
+	return <Pagination projects={jobs.jobs_results} itemsPerPage={5} />
 }
