@@ -7,7 +7,7 @@ export interface JobItemInterface {
 	employer: string
 	title: string
 	description: string
-	type: string
+	type?: string
 	location: string
 	publishedDate: string
 }
@@ -23,17 +23,17 @@ export const JobItem = ({
 	publishedDate,
 }: JobItemInterface) => {
 	const ImageNotFound = (
-		<div className='grid place-items-center rounded-primary bg-gray w-[5.625rem] h-[5.625rem]'>
+		<div className='grid place-items-center rounded-primary bg-gray min-w-[5.625rem] min-h-[5.625rem]'>
 			<span>not found</span>
 		</div>
 	)
 
 	return (
 		<div className='md:flex justify-between items-end w-full bg-white rounded-primary shadow p-3'>
-			<div className='flex gap-4 mb-[.9375rem] md:mb-0'>
+			<div className='flex gap-4 mb-[.9375rem] md:mb-0 basis-full items-center'>
 				{image ? (
 					<img
-						className='w-[90px] h-[90px] object-contain'
+						className='min-w-[5.625rem] min-h-[5.625rem] max-w-[5.625rem] max-h-[5.625rem] object-contain'
 						src={image}
 						alt={employer}
 					/>
@@ -56,7 +56,7 @@ export const JobItem = ({
 					</div>
 				</div>
 			</div>
-			<div className='flex gap-[1.7813rem]'>
+			<div className='flex gap-[1.7813rem] basis-5/6'>
 				<div className='ml-auto'>
 					<span className='flex items-center gap-[.4688rem] font-roboto font-medium text-xs leading-[14px] text-gray'>
 						<span className='material-icons text-gray text-[.9375rem]'>
