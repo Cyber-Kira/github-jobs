@@ -1,6 +1,11 @@
 import React from 'react'
+import { useAppDispatch, useAppSelector } from '../../../../app/hooks'
+import { setIsFullTime } from '../../../../features/search/searchSlice'
 
 export const JobType = () => {
+	const dispatch = useAppDispatch()
+	const { isFullTime } = useAppSelector(store => store.search)
+
 	return (
 		<div className='ml-[.875rem]'>
 			<label
@@ -12,6 +17,8 @@ export const JobType = () => {
 					type='checkbox'
 					name='jobType'
 					id='jobType'
+					checked={isFullTime}
+					onChange={() => dispatch(setIsFullTime())}
 				/>
 				<span className='material-icons absolute left-[2px] -top-[1px] text-sm hidden peer-checked:text-white peer-checked:block pointer-events-none transition-all'>
 					done
