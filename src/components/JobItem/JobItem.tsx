@@ -24,7 +24,9 @@ export const JobItem = ({
 }: JobItemInterface) => {
 	const ImageNotFound = (
 		<div className='grid place-items-center rounded-primary bg-gray min-w-[5.625rem] min-h-[5.625rem]'>
-			<span>not found</span>
+			<span className='font-roboto font-medium text-xs leading-[14px] text-[#292929]'>
+				not found
+			</span>
 		</div>
 	)
 
