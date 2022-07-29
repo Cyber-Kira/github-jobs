@@ -56,7 +56,7 @@ export const Pagination = ({
 	}
 
 	return (
-		<>
+		<section>
 			<Items currentItems={currentItems} />
 			<ReactPaginate
 				breakLabel={<span className='material-icons'>more_horiz</span>}
@@ -78,6 +78,6 @@ export const Pagination = ({
 				pageRangeDisplayed={2}
 				marginPagesDisplayed={2}
 			/>
-		</>
+		</section>
 	)
 }

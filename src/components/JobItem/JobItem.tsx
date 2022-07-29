@@ -28,6 +28,15 @@ export const JobItem = ({
 		</div>
 	)
 
+	const publishedDateElement = (
+		<div className='mr-[2.4375rem] md:mr-0'>
+			<span className='flex items-center gap-[.4688rem] font-roboto font-medium text-xs leading-[14px] text-gray'>
+				<span className='material-icons text-gray text-[15px]'>schedule</span>
+				{publishedDate}
+			</span>
+		</div>
+	)
+
 	return (
 		<div className='md:flex justify-between items-end w-full bg-white rounded-primary shadow p-3'>
 			<div className='flex gap-4 mb-[.9375rem] md:mb-0 basis-full items-center'>
@@ -65,14 +74,7 @@ export const JobItem = ({
 						{location}
 					</span>
 				</div>
-				<div className='mr-[2.4375rem] md:mr-0'>
-					<span className='flex items-center gap-[.4688rem] font-roboto font-medium text-xs leading-[14px] text-gray'>
-						<span className='material-icons text-gray text-[15px]'>
-							schedule
-						</span>
-						{publishedDate}
-					</span>
-				</div>
+				{publishedDate ? publishedDateElement : null}
 			</div>
 		</div>
 	)
