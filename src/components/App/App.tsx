@@ -15,8 +15,7 @@ export const App = () => {
 					<Filter />
 				</div>
 				<div className='md:col-span-8'>
-					<div id='Projects' />
-					<JobItems />
+						<div id='jobs' />
 				</div>
 			</div>
 			<Footer />

@@ -48,7 +48,7 @@ export const Pagination = ({
 
 	const handlePageClick = (event: { selected: number }) => {
 		const newOffset = (event.selected * itemsPerPage) % projects.length
-		const top = document.getElementById('Projects')?.offsetTop
+		const top = document.getElementById('jobs')?.offsetTop
 
 		setItemOffset(newOffset)
 
