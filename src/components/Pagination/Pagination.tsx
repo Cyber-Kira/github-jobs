@@ -32,6 +32,10 @@ export const Pagination = ({
 	itemsPerPage: number
 	projects: JobsResultInterface[]
 }) => {
+	if (!projects || projects.length === 0) {
+		return null
+	}
+
 	const [currentItems, setCurrentItems] = useState<JobsResultInterface[]>([])
 	const [pageCount, setPageCount] = useState(0)
 	const [itemOffset, setItemOffset] = useState(0)
