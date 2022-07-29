@@ -16,6 +16,9 @@ export const App = () => {
 				</div>
 				<div className='md:col-span-8'>
 						<div id='jobs' />
+						<ErrorBoundary>
+							<JobItems />
+						</ErrorBoundary>
 				</div>
 			</div>
 			<Footer />
