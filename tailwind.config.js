@@ -24,7 +24,7 @@ module.exports = {
 			primary: '#334680',
 			accent: '#1E86FF',
 			light: '#F6F7FB',
-			gray: '#B9BDCF ',
+			gray: '#B9BDCF',
 			dark: '#282538',
 		},
 		plugins: [],
