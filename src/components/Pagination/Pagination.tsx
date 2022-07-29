@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
+import { useAppSelector } from '../../app/hooks'
 import { JobsResultInterface } from '../../features/jobs/googleJobsSlice'
 import { JobItem } from '../JobItem'
+import { JobItemSkeleton } from '../JobItem/components/JobItemsSkeleton'
 
 const Items = ({ currentItems }: { currentItems: JobsResultInterface[] }) => {
+	const { isLoading } = useAppSelector(store => store.googleJobs)
+	const skeletonElements = Array.from(Array(5).keys()).map(item => {
+		return <JobItemSkeleton key={item} />
+	})
+
+	if (isLoading) {
+		return <div className='flex flex-col gap-8'>{skeletonElements}</div>
+	}
+
 	return (
 		<div className='flex flex-col gap-8'>
 			{currentItems &&
@@ -11,8 +22,8 @@ const Items = ({ currentItems }: { currentItems: JobsResultInterface[] }) => {
 					return (
 						<JobItem
 							key={item.job_id}
+							id={item.job_id}
 							image={item.thumbnail}
-							description={item.description}
 							employer={item.company_name}
 							location={item.location}
 							publishedDate={item.detected_extensions.posted_at}

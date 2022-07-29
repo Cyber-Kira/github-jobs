@@ -24,7 +24,6 @@ export const fetchJobsByQuery = <T = any>(
 		})
 		.then((response: AxiosResponse<T>) => {
 			const { data } = response
-			console.log(data)
 			return data
 		})
 		.catch((error: AxiosError) => {

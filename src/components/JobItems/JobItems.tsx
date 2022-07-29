@@ -1,7 +1,6 @@
 import React from 'react'
 import { useAppSelector } from '../../app/hooks'
 import { Pagination } from '../Pagination'
-import { JobItemSkeleton } from '../JobItem/components/JobItemsSkeleton'
 
 export const JobItems = () => {
 	const { jobs, isLoading } = useAppSelector(store => store.googleJobs)
@@ -16,15 +15,5 @@ export const JobItems = () => {
 		)
 	}
 
-	const skeletonElements = Array.from(Array(5).keys()).map(item => {
-		return <JobItemSkeleton key={item} />
-	})
-
-	const JobItemsElement = isLoading ? (
-		skeletonElements
-	) : (
-		<Pagination projects={jobs.jobs_results} itemsPerPage={5} />
-	)
-
-	return <div className='flex flex-col gap-8'>{JobItemsElement}</div>
+	return <Pagination projects={jobs.jobs_results} itemsPerPage={5} />
 }

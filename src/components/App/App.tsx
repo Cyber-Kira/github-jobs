@@ -1,29 +1,18 @@
 import React from 'react'
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
-import { Filter } from '../Filter'
+import { Route, Routes } from 'react-router-dom'
 import { Footer } from '../Footer'
 import { Header } from '../Header'
-import { JobItems } from '../JobItems'
-import { Search } from '../Search'
+import { JobItemDetails } from '../JobItemDetails'
+import { MainLayout } from '../MainLayout'
 
 export const App = () => {
 	return (
 		<div className='max-w-5xl md:mx-auto flex flex-col gap-8 px-3 md:px-0'>
 			<Header />
-			<main className='flex flex-col gap-8'>
-				<Search />
-				<div className='grid grid-cols-1 gap-8 md:grid-cols-12'>
-					<div className='md:col-span-4'>
-						<Filter />
-					</div>
-					<div className='md:col-span-8'>
-						<div id='jobs' />
-						<ErrorBoundary>
-							<JobItems />
-						</ErrorBoundary>
-					</div>
-				</div>
-			</main>
+			<Routes>
+				<Route path='/' element={<MainLayout />} />
+				<Route path='/job/:id' element={<JobItemDetails />} />
+			</Routes>
 			<Footer />
 		</div>
 	)
