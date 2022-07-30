@@ -30,3 +30,22 @@ export const fetchJobsByQuery = <T = any>(
 			throw new Error(`error: ${error}`)
 		})
 }
+
+export const fetchLocations = (query: string) => {
+	return axios
+		.request({
+			method: 'GET',
+			url: `https://${corsApiHost}/https://serpapi.com/locations.json`,
+			params: {
+				q: query,
+				limit: 5,
+			},
+		})
+		.then((response: AxiosResponse) => {
+			const { data } = response
+			return data
+		})
+		.catch((error: AxiosError) => {
+			throw new Error(`error: ${error}`)
+		})
+}
