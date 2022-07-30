@@ -15,6 +15,10 @@ export const JobItemDetails = () => {
 		item => item.job_id.replaceAll('/', '') === id
 	)
 
+	if (!currentJob) {
+		return null
+	}
+
 	const ImageNotFound = (
 		<div className='grid place-items-center rounded-primary bg-gray min-w-[2.625rem] min-h-[2.625rem] max-w-[2.625rem] max-h-[2.625rem]'>
 			<span className='font-roboto font-medium text-base leading-[.875rem] text-[#292929]'>
@@ -51,7 +55,7 @@ export const JobItemDetails = () => {
 			<div className='col-span-9'>
 				<div>
 					<div className='flex items-center gap-4'>
-						<h1 className='font-roboto font-bold text-2xl leading-[1.75rem] text-primary'>
+						<h1 className='font-roboto font-bold text-2xl leading-[1.75rem] text-primary max-w-[80%]'>
 							{currentJob?.title}
 						</h1>
 						<span className='font-roboto font-bold text-xs leading-[.875rem] text-primary py-[6px] px-[.5rem] border-[.0625rem] border-primary rounded-primary'>
