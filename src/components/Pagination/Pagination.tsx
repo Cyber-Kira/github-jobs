@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import { useAppSelector } from '../../app/hooks'
-import { JobsResultInterface } from '../../features/jobs/googleJobsSlice'
+import {
+	JobResulInterface,
+	JobsResultInterface,
+} from '../../features/jobs/craigslistSlice'
 import { JobItem } from '../JobItem'
 import { JobItemSkeleton } from '../JobItem/components/JobItemsSkeleton'
 
@@ -21,14 +24,11 @@ const Items = ({ currentItems }: { currentItems: JobsResultInterface[] }) => {
 				currentItems.map(item => {
 					return (
 						<JobItem
-							key={item.job_id}
-							id={item.job_id}
-							image={item.thumbnail}
-							employer={item.company_name}
+							key={item.detail_url}
+							id={item.detail_url}
 							location={item.location}
-							publishedDate={item.detected_extensions.posted_at}
+							publishedDate={item.date_posted}
 							title={item.title}
-							type={item.detected_extensions.schedule_type}
 						/>
 					)
 				})}
@@ -41,9 +41,9 @@ export const Pagination = ({
 	projects,
 }: {
 	itemsPerPage: number
-	projects: JobsResultInterface[]
+	projects: JobResulInterface
 }) => {
-	if (!projects || projects.length === 0) {
+	if (!projects || projects.jobs.length === 0) {
 		return null
 	}
 
@@ -53,12 +53,12 @@ export const Pagination = ({
 
 	useEffect(() => {
 		const endOffset = itemOffset + itemsPerPage
-		setCurrentItems(projects.slice(itemOffset, endOffset))
-		setPageCount(Math.ceil(projects.length / itemsPerPage))
+		setCurrentItems(projects.jobs.slice(itemOffset, endOffset))
+		setPageCount(Math.ceil(projects.jobs.length / itemsPerPage))
 	}, [itemOffset, itemsPerPage, projects])
 
 	const handlePageClick = (event: { selected: number }) => {
-		const newOffset = (event.selected * itemsPerPage) % projects.length
+		const newOffset = (event.selected * itemsPerPage) % projects.jobs.length
 		const top = document.getElementById('jobs')?.offsetTop
 
 		setItemOffset(newOffset)

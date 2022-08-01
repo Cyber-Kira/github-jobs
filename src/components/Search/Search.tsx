@@ -1,12 +1,11 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { fetchGoogleJobs } from '../../features/jobs/googleJobsSlice'
+import { fetchCraigslistJobs } from '../../features/jobs/craigslistSlice'
 import { setSearchQuery } from '../../features/search/searchSlice'
 import Image from './assets/backgroundImg.png'
 
 export const Search = () => {
-	const { searchQuery, locationQuery, favLocation, isFullTime } =
-		useAppSelector(store => store.search)
+	const { searchQuery, locationQuery } = useAppSelector(store => store.search)
 	const dispatch = useAppDispatch()
 
 	const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
@@ -14,11 +13,9 @@ export const Search = () => {
 
 		if (searchQuery)
 			dispatch(
-				fetchGoogleJobs({
+				fetchCraigslistJobs({
 					searchQuery,
 					searchLocationQuery: locationQuery,
-					favLocation,
-					isFullTime,
 				})
 			)
 	}

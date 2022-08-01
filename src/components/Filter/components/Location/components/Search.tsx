@@ -7,94 +7,98 @@ import {
 } from '../../../../../features/search/searchSlice'
 
 export const Search = () => {
-	const { locationQuery, locations } = useAppSelector(store => store.search)
-	const [searchTerm, setSearchTerm] = useState<string | null>(null)
-	const [isInFocus, setIsInFocus] = useState(false)
-	const dispatch = useAppDispatch()
-	let currentFocus = -1
+	// ----------------------------------------------------------------------
+	// Due to technicall issues with API search functionallity was removed  -
+	// ----------------------------------------------------------------------
 
-	const handleChange = (query: string) => {
-		dispatch(setLocationQuery(query))
-		setSearchTerm(query)
-	}
+	// const { locationQuery, locations } = useAppSelector(store => store.search)
+	// const [searchTerm, setSearchTerm] = useState<string | null>(null)
+	// const [isInFocus, setIsInFocus] = useState(false)
+	// const dispatch = useAppDispatch()
+	// let currentFocus = -1
 
-	const removeActive = (searchItems: NodeListOf<Element>) => {
-		searchItems.forEach(item => item.classList.remove('text-white'))
-		searchItems.forEach(item => item.classList.remove('bg-primary'))
-	}
+	// const handleChange = (query: string) => {
+	// 	dispatch(setLocationQuery(query))
+	// 	setSearchTerm(query)
+	// }
 
-	const addActive = (
-		elements: HTMLCollectionOf<HTMLButtonElement> | undefined
-	) => {
-		const searchItems = document.querySelectorAll('.search-item')
+	// const removeActive = (searchItems: NodeListOf<Element>) => {
+	// 	searchItems.forEach(item => item.classList.remove('text-white'))
+	// 	searchItems.forEach(item => item.classList.remove('bg-primary'))
+	// }
 
-		removeActive(searchItems)
+	// const addActive = (
+	// 	elements: HTMLCollectionOf<HTMLButtonElement> | undefined
+	// ) => {
+	// 	const searchItems = document.querySelectorAll('.search-item')
 
-		if (currentFocus >= searchItems.length) {
-			currentFocus = 0
-		}
+	// 	removeActive(searchItems)
 
-		if (currentFocus < 0) {
-			currentFocus = searchItems.length - 1
-		}
+	// 	if (currentFocus >= searchItems.length) {
+	// 		currentFocus = 0
+	// 	}
 
-		if (elements) {
-			elements[currentFocus].classList.add('text-white')
-			elements[currentFocus].classList.add('bg-primary')
-		}
-	}
+	// 	if (currentFocus < 0) {
+	// 		currentFocus = searchItems.length - 1
+	// 	}
 
-	const handleClick = (
-		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-		query: string
-	) => {
-		setSearchTerm(query)
-		dispatch(setLocationQuery(query))
-		dispatch(fetchLocationsByQuery(null))
+	// 	if (elements) {
+	// 		elements[currentFocus].classList.add('text-white')
+	// 		elements[currentFocus].classList.add('bg-primary')
+	// 	}
+	// }
 
-		setIsInFocus(false)
-	}
+	// const handleClick = (
+	// 	e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+	// 	query: string
+	// ) => {
+	// 	setSearchTerm(query)
+	// 	dispatch(setLocationQuery(query))
+	// 	dispatch(fetchLocationsByQuery(null))
 
-	const handleBlur = () => {
-		if (!isInFocus) setIsInFocus(true)
-	}
+	// 	setIsInFocus(false)
+	// }
 
-	const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-		const currentElements = document
-			.getElementById('search-items')
-			?.getElementsByTagName('button')
+	// const handleBlur = () => {
+	// 	if (!isInFocus) setIsInFocus(true)
+	// }
 
-		if (e.key === 'ArrowDown') {
-			e.preventDefault()
-			currentFocus += 1
-			addActive(currentElements)
-		} else if (e.key === 'ArrowUp') {
-			e.preventDefault()
-			currentFocus -= 1
-			addActive(currentElements)
-		} else if (e.key === 'Enter') {
-			e.preventDefault()
-			if (currentFocus > -1) {
-				if (document.getElementById(`${currentFocus}`)) {
-					document.getElementById(`${currentFocus}`)?.click()
-					currentFocus = -1
-					removeActive(document.querySelectorAll('.search-item'))
-				}
-			}
-		}
-	}
+	// const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+	// 	const currentElements = document
+	// 		.getElementById('search-items')
+	// 		?.getElementsByTagName('button')
 
-	useEffect(() => {
-		const delayDebounceFn = setTimeout(() => {
-			if (searchTerm) {
-				dispatch(fetchLocationsByQuery(searchTerm))
-			} else {
-				dispatch(fetchLocationsByQuery(null))
-			}
-		}, 450)
+	// 	if (e.key === 'ArrowDown') {
+	// 		e.preventDefault()
+	// 		currentFocus += 1
+	// 		addActive(currentElements)
+	// 	} else if (e.key === 'ArrowUp') {
+	// 		e.preventDefault()
+	// 		currentFocus -= 1
+	// 		addActive(currentElements)
+	// 	} else if (e.key === 'Enter') {
+	// 		e.preventDefault()
+	// 		if (currentFocus > -1) {
+	// 			if (document.getElementById(`${currentFocus}`)) {
+	// 				document.getElementById(`${currentFocus}`)?.click()
+	// 				currentFocus = -1
+	// 				removeActive(document.querySelectorAll('.search-item'))
+	// 			}
+	// 		}
+	// 	}
+	// }
 
-		return () => clearTimeout(delayDebounceFn)
-	}, [searchTerm])
+	// useEffect(() => {
+	// 	const delayDebounceFn = setTimeout(() => {
+	// 		if (searchTerm) {
+	// 			dispatch(fetchLocationsByQuery(searchTerm))
+	// 		} else {
+	// 			dispatch(fetchLocationsByQuery(null))
+	// 		}
+	// 	}, 450)
+
+	// 	return () => clearTimeout(delayDebounceFn)
+	// }, [searchTerm])
 
 	return (
 		<div className='relative flex items-center w-full h-[3rem] z-20 shadow hover:shadow-md transition-shadow'>
@@ -113,16 +117,16 @@ export const Search = () => {
 					autoComplete='off'
 					list='omdb'
 					placeholder='City, state, zip code or country'
-					value={locationQuery}
-					onChange={e => handleChange(e.target.value)}
-					onKeyDown={e => handleKeyDown(e)}
-					onFocus={() => {
-						setIsInFocus(true)
-						dispatch(fetchLocationsByQuery(searchTerm))
-					}}
-					onBlur={() => handleBlur()}
+					// value={locationQuery}
+					// onChange={e => handleChange(e.target.value)}
+					// onKeyDown={e => handleKeyDown(e)}
+					// onFocus={() => {
+					// setIsInFocus(true)
+					// dispatch(fetchLocationsByQuery(searchTerm))
+					// }}
+					// onBlur={() => handleBlur()}
 				/>
-				{isInFocus ? (
+				{/* {isInFocus ? (
 					<div
 						id='search-items'
 						className='absolute flex flex-col z-30 top-full left-0 right-0 border-l-[1px] border-r-[1px] border-gray max-h-64 overflow-y-auto border-t'
@@ -143,7 +147,7 @@ export const Search = () => {
 							)
 						})}
 					</div>
-				) : null}
+				) : null} */}
 			</div>
 		</div>
 	)

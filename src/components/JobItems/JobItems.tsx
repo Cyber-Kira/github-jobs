@@ -4,9 +4,9 @@ import { JobItemSkeleton } from '../JobItem/components/JobItemsSkeleton'
 import { Pagination } from '../Pagination'
 
 export const JobItems = () => {
-	const { jobs, isLoading } = useAppSelector(store => store.googleJobs)
+	const { jobs, isLoading } = useAppSelector(store => store.craigslist)
 
-	if (!jobs.jobs_results && !isLoading) {
+	if (!jobs && !isLoading) {
 		return (
 			<div className='w-full text-center font-raleway flex flex-col gap-5 text-2xl text-lightestGray'>
 				<span className='material-icons text-[100px]'>warning</span>
@@ -24,5 +24,5 @@ export const JobItems = () => {
 		return <div className='flex flex-col gap-8'>{skeletonElements}</div>
 	}
 
-	return <Pagination projects={jobs.jobs_results} itemsPerPage={5} />
+	return <Pagination projects={jobs} itemsPerPage={5} />
 }
